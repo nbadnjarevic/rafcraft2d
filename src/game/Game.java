@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 @SuppressWarnings("serial")
 public class Game extends JFrame{
 
-	public static Spritesheet sprite = new Spritesheet(6, 80);
+	public static Spritesheet sprite = new Spritesheet(ImageLoader.load("img/spritesheet.png"), 6, 80, 80);
 	public static final int BLOCKSIZE = 32;
 	public Game() {
 		super("RAFCraft2D");

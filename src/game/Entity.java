@@ -1,6 +1,5 @@
 package game;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 
 public class Entity extends GameObject {
@@ -27,20 +26,49 @@ public class Entity extends GameObject {
 	protected boolean botLeft;
 	protected boolean botRight;
 
-	public Entity(float x, float y, int width, int height, float speed) {
+	// Animation
+	protected int idle;
+	protected int state;
+	protected int[] frames = { 1, 1, 4, 4 };
+	protected final int IDLE_LEFT = 1;
+	protected final int IDLE_RIGHT = 2;
+	protected final int LEFT = 1;
+	protected final int RIGHT = 2;
+	protected Animation animation;
+
+	public Entity(Spritesheet sprite, float x, float y, int width, int height, float speed) {
 		super(x, y, width, height);
 		this.speed = speed;
+		this.animation = new Animation(sprite, IDLE_RIGHT, frames[IDLE_RIGHT], 150L);
+		this.idle = IDLE_RIGHT;
 	}
 
 	public void render(Graphics2D g) {
-		g.setColor(Color.RED);
-		g.fillRect((int) x, (int) y, width, height);
+		g.drawImage(animation.getImage(), (int) x, (int) y, width, height, null);
 	}
 
 	public void update() {
 		calculateMovement();
 		calculateCollision();
+		calculateAnimations();
 		move();
+	}
+
+	private void calculateAnimations() {
+		animation.update();
+		if(left && animation.getState() != LEFT) {
+			animation.setImages(LEFT, frames[LEFT+2]);
+			idle = IDLE_LEFT;
+		} else if(right && animation.getState() != RIGHT) {
+			animation.setImages(RIGHT, frames[RIGHT]);
+			idle = IDLE_RIGHT;
+		}
+		if(!left && !right) {
+			animation.setImages(idle, frames[idle]);
+		}
+		if(jumping || falling) {
+			animation.setImages(idle, frames[idle]);
+		}
 	}
 
 	private void calculateCollision() {
