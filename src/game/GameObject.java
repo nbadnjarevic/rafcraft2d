@@ -15,20 +15,24 @@ public abstract class GameObject {
 		this.width = width;
 		this.height = height;
 	}
-	
+
 	public void setLocation(int x, int y) {
 		this.x = x;
-		this.y = y;	
+		this.y = y;
 	}
-	
+
 	public Rectangle getBox() {
 		Rectangle rectangle = new Rectangle();
-		rectangle.setBounds((int)x, (int)y, width, height);
+		rectangle.setBounds((int) x, (int) y, width, height);
 		return rectangle;
 	}
 
 	public float getX() {
 		return x;
+	}
+
+	public int getCenterX() {
+		return (int) x + width / 2;
 	}
 
 	public void setX(float x) {
@@ -37,6 +41,10 @@ public abstract class GameObject {
 
 	public float getY() {
 		return y;
+	}
+
+	public int getCenterY() {
+		return (int) y + height / 2;
 	}
 
 	public void setY(float y) {
@@ -58,7 +66,5 @@ public abstract class GameObject {
 	public void setHeight(int height) {
 		this.height = height;
 	}
-	
-	
 
 }

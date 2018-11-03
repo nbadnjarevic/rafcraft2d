@@ -53,7 +53,7 @@ public class GamePanel extends JPanel implements ComponentListener, ActionListen
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 		gsm.render(g2d);
-		g.drawImage(image.getScaledInstance(width, height, image.SCALE_DEFAULT), 0, 0, null);
+		g.drawImage(image, 0, 0, width, height, null);
 	}
 	
 	@Override

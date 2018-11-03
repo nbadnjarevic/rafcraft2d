@@ -39,7 +39,7 @@ public class Entity extends GameObject {
 	public Entity(Spritesheet sprite, float x, float y, int width, int height, float speed) {
 		super(x, y, width, height);
 		this.speed = speed;
-		this.animation = new Animation(sprite, IDLE_RIGHT, frames[IDLE_RIGHT], 150L);
+		this.animation = new Animation(sprite, IDLE_RIGHT, frames[IDLE_RIGHT], 120L);
 		this.idle = IDLE_RIGHT;
 	}
 

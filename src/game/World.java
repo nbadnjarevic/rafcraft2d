@@ -11,40 +11,35 @@ public class World {
 
 	private int blocksX;
 	private int blocksY;
-	private int blocksize;
-	private int chunksize;
-	private String filepath;
 	private Block[][] blocks;
-	private Chunk[][] chunks;
 
-	public World(String filepath, int blocksize, int chunksize) {
-		this.blocksize = blocksize;
-		this.filepath = filepath;
-		this.chunksize = chunksize;
-		loadWorld();
-		setChunks();
+	public World(String filepath, int chunksize) {
+		loadWorld(filepath);
 	}
 
 	public void render(Graphics2D g) {
-		for (int row = 0; row < chunks.length; row++) {
-			for (int col = 0; col < chunks[0].length; col++) {
-				chunks[row][col].render(g);
+		int blocksRendered = 0;
+		Player player = Playstate.player;
+		int startX = player.getCenterX() - GamePanel.width / GamePanel.SCALE / 2;
+		int startY = player.getCenterY() - GamePanel.height / GamePanel.SCALE / 2;
+		int endX = player.getCenterX() + GamePanel.width / GamePanel.SCALE / 2 + Game.BLOCKSIZE;
+		int endY = player.getCenterY() + GamePanel.height / GamePanel.SCALE / 2 + Game.BLOCKSIZE;
+
+		for (int row = startY; row <= endY; row += Game.BLOCKSIZE) {
+			for (int col = startX; col <= endX; col += Game.BLOCKSIZE) {
+				int blockX = getColTile(col);
+				int blockY = getRowTile(row);
+				if (blockX >= 0 && blockY >= 0 && blockX < this.blocksX && blockY < this.blocksY) {
+					blocks[blockY][blockX].render(g);
+					blocksRendered++;
+				}
 			}
 		}
+		//g.setColor(Color.white);
+		//g.drawString("Blocks rendered: " + blocksRendered, 5, 20);
 	}
 
-	public void setChunks() {
-		int chunksX = blocksX / chunksize;
-		int chunksY = blocksY / chunksize;
-		chunks = new Chunk[chunksY][chunksX];
-		for (int row = 0; row < chunksY; row++) {
-			for (int col = 0; col < chunksX; col++) {
-				chunks[row][col] = new Chunk(blocks, col * chunksize, row * chunksize, chunksize);
-			}
-		}
-	}
-
-	public void loadWorld() {
+	public void loadWorld(String filepath) {
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(new File(filepath)));
 			blocksX = Integer.parseInt(reader.readLine());
@@ -56,8 +51,8 @@ public class World {
 				String tokens[] = line.split(" ");
 				for (int col = 0; col < blocksX; col++) {
 					int id = Integer.parseInt(tokens[col]);
-					blocks[row][col] = new Block(Material.values()[id], col * blocksize, row * blocksize, blocksize,
-							blocksize);
+					blocks[row][col] = new Block(Material.values()[id], col * Game.BLOCKSIZE, row * Game.BLOCKSIZE,
+							Game.BLOCKSIZE, Game.BLOCKSIZE);
 				}
 			}
 
@@ -75,24 +70,21 @@ public class World {
 		}
 
 	}
-	
+
 	public int getRowTile(int y) {
 		return y / Game.BLOCKSIZE;
 	}
-	
+
 	public int getColTile(int x) {
 		return x / Game.BLOCKSIZE;
 	}
-	
+
 	public Block getBlock(int x, int y) {
 		return blocks[getRowTile(y)][getColTile(x)];
 	}
-	
+
 	public Block[][] getBlocks() {
 		return blocks;
 	}
 
-	public Chunk[][] getChunks() {
-		return chunks;
-	}
 }
