@@ -14,7 +14,7 @@ public class Game extends JFrame{
 		setLayout(new BorderLayout());
 		setSize(800,600);
 		add(new GamePanel(), BorderLayout.CENTER);
-		setResizable(false);
+		//setResizable(false);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setVisible(true);

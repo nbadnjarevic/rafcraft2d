@@ -8,11 +8,13 @@ public class Playstate extends State {
 	
 	public static World world;
 	public static Player player;
+	public static Camera camera;
 
 	public Playstate(GameStateManager gsm) {
 		super(gsm);
 		world = new World("worlds/world2.txt", 32, 10);
 		player = new Player(40, 5, 32, 48, 1F);
+		camera = new Camera(player);
 	}
 
 	@Override
@@ -22,7 +24,7 @@ public class Playstate extends State {
 
 	@Override
 	public void render(Graphics2D g) {
-		g.clearRect(0, 0, 800, 600);
+		g.clearRect(0, 0, GamePanel.width, GamePanel.height);
 		world.render(g);
 		player.render(g);
 	}
