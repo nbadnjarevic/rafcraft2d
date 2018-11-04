@@ -13,7 +13,7 @@ public class Playstate extends State {
 	public Playstate(GameStateManager gsm) {
 		super(gsm);
 		world = new World("worlds/world2.txt", 10);
-		player = new Player(40, 5, 32, 48, 1F);
+		player = new Player(40, 5, 32, 48, 3F);
 		camera = new Camera(player);
 	}
 

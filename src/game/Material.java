@@ -5,11 +5,13 @@ import java.awt.image.BufferedImage;
 public enum Material {
 	
 	// MATERIAL LIST
-	GRASS(0, false),
-	DIRT(1, false),
+	GRASS(1, false),
+	DIRT(0, false),
 	STONE(2, false),
-	ROCK(3, true),
-	AIR(15, true);
+	EDGE(5, false),
+	AIR(5, true),
+	WOOD(3, true),
+	LEAF(4, true);
 	
 
 	private int id;

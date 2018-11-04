@@ -13,7 +13,6 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.VolatileImage;
-
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -141,8 +140,7 @@ public class GamePanel extends JPanel implements ComponentListener, ActionListen
 
 	@Override
 	public void componentShown(ComponentEvent arg0) {
-		// TODO Auto-generated method stub
-		
+		this.requestFocusInWindow();
 	}
 
 	
