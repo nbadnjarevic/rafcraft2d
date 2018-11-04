@@ -110,8 +110,8 @@ public class Entity extends GameObject {
 
 	private void calculateCorners(float x, float y) {
 		World world = Playstate.world;
-		int leftTile = world.getColTile((int) x);
-		int rightTile = world.getColTile((int) x + width - 1);
+		int leftTile = world.getColTile((int) x + 7);
+		int rightTile = world.getColTile((int) x + width - 8);
 		int topTile = world.getRowTile((int) y);
 		int midTile = world.getRowTile((int) y + height / 2);
 		int botTile = world.getRowTile((int) y + height);

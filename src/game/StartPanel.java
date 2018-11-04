@@ -65,6 +65,7 @@ public class StartPanel extends JPanel {
 			System.exit(0);;
 		});
 	}
+
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
