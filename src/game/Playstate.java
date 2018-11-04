@@ -20,6 +20,9 @@ public class Playstate extends State {
 	@Override
 	public void update() {
 		player.update();
+		for(Bullet blt: player.getBlts()){
+			blt.update();
+		}
 	}
 
 	@Override
@@ -27,6 +30,9 @@ public class Playstate extends State {
 		g.clearRect(0, 0, GamePanel.width, GamePanel.height);
 		world.render(g);
 		player.render(g);
+		for(Bullet blt: player.getBlts()){
+			blt.render(g);
+		}
 	}
 
 	@Override
