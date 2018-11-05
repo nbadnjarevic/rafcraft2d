@@ -11,8 +11,7 @@ public class Sprite {
 	BufferedImage raster;
 
 	public Sprite() {
-		this.raster = new BufferedImage( 
-                240, 160, BufferedImage.TYPE_INT_RGB );
+		this.raster = new BufferedImage(240, 160, BufferedImage.TYPE_INT_RGB);
 		File outputfile = new File("img/spritesheet.png");
 		int rgb[] = { 100, 100, 255 };
 		int col = (rgb[0] << 16) | (rgb[1] << 8) | rgb[2];
@@ -37,25 +36,57 @@ public class Sprite {
 	public void drawLeafBlock(int x, int y) {
 		int startX = x * blocksize;
 		int startY = y * blocksize;
-		int[] rgb = { 34, 139, 34 };
-		int col = (rgb[0] << 16) | (rgb[1] << 8) | rgb[2];
+		int[] rgb1 = { 34, 139, 34 };
+		int[] rgb2 = { 127, 255, 0 };
+		int col = 0;
 		for (int i = startY; i < startY + blocksize; i++) {
 			for (int j = startX; j < startX + blocksize; j++) {
-				raster.setRGB(i, j, col);
+				int r = (int) (Math.random() * ((3) + 1));
+				switch (r) {
+				case 1: {
+					col = (rgb1[0] << 16) | (rgb1[1] << 8) | rgb1[2];
+					raster.setRGB(i, j, col);
+					break;
+				}
+				case 2: {
+					col = (rgb2[0] << 16) | (rgb2[1] << 8) | rgb2[2];
+					raster.setRGB(i, j, col);
+					break;
+				}
+				}
+
 			}
 		}
 	}
 
-	public void drawWoodBlock(int x, int y) {
+	public void drawWoodBlock(int y, int x) {
 		int startX = x * blocksize;
 		int startY = y * blocksize;
 		int[] rgb = { 160, 82, 45 };
 		int[] rgb1 = { 205, 133, 63 };
 		int col = (rgb[0] << 16) | (rgb[1] << 8) | rgb[2];
 		for (int i = startY; i < startY + blocksize; i++) {
-			for (int j = startX; j < startX + blocksize; j++) {
-				raster.setRGB(i, j, col);
+			for (int j = startX + 16; j < startX + blocksize - 16; j++) {
+				col = (rgb[0] << 16) | (rgb[1] << 8) | rgb[2];
+				raster.setRGB(j, i, col);
 			}
+		}
+		for (int i = startY; i < startY + blocksize; i++) {
+			for (int j = startX + 10; j < startX + 15; j++) {
+				col = (rgb1[0] << 16) | (rgb1[1] << 8) | rgb1[2];
+				raster.setRGB(j, i, col);
+			}
+		}
+		for (int i = startY; i < startY + blocksize; i++) {
+			for (int j = startX + blocksize - 16; j < startX + blocksize - 10; j++) {
+				col = (rgb1[0] << 16) | (rgb1[1] << 8) | rgb1[2];
+				raster.setRGB(j, i, col);
+			}
+		}
+		for (int i = startY + 15; i < startY + blocksize - 15; i++) {
+			col = (rgb1[0] << 16) | (rgb1[1] << 8) | rgb1[2];
+			raster.setRGB(startX + 25, i, col);
+			raster.setRGB(startX + blocksize - 25, i, col);
 		}
 	}
 
@@ -95,11 +126,11 @@ public class Sprite {
 		int[] rgb1 = { 139, 69, 19 };
 		int[] rgb2 = { 160, 82, 45 };
 		int[] rgb3 = { 128, 0, 0 };
-		
+
 		int[] rgb4 = { 124, 252, 0 };
 		int[] rgb5 = { 127, 255, 0 };
 		int[] rgb6 = { 0, 255, 0 };
-		
+
 		int col = (rgb[0] << 16) | (rgb[1] << 8) | rgb[2];
 		for (int i = startY; i < startY + blocksize; i++) {
 			for (int j = startX + 5; j < startX + blocksize; j++) {
@@ -122,7 +153,7 @@ public class Sprite {
 			}
 		}
 		for (int i = startY; i < startY + blocksize; i++) {
-			for (int j = startX; j < startX + 5; j++) {
+			for (int j = startX; j < startX + 10; j++) {
 				int r = (int) (Math.random() * ((3) + 1));
 				switch (r) {
 				case 1: {

@@ -36,7 +36,7 @@ public class Player extends Entity {
 			}
 		}
 		if(k == KeyEvent.VK_K){
-			Bullet blt = new Bullet(x, y + height/2, 8, 8, strana);
+			Bullet blt = new Bullet(x, y + height/2, 16, 16, strana);
 			blts.add(blt);
 		}
 

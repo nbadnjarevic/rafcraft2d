@@ -3,24 +3,26 @@ package game;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
 
 public class Playstate extends State {
-	
+
 	public static World world;
 	public static Player player;
 	public static Camera camera;
 
 	public Playstate(GameStateManager gsm) {
 		super(gsm);
-		world = new World("worlds/world2.txt", 10);
-		player = new Player(400, 5, 32, 48, 3F);
+		BufferedImage map = ImageLoader.load("worlds/map.png");
+		world = new World(map , 10);
+		player = new Player(100, 700, 32, 48, 3F);
 		camera = new Camera(player);
 	}
 
 	@Override
 	public void update() {
 		player.update();
-		for(Bullet blt: player.getBlts()){
+		for (Bullet blt : player.getBlts()) {
 			blt.update();
 		}
 	}
@@ -30,7 +32,7 @@ public class Playstate extends State {
 		g.clearRect(0, 0, GamePanel.width, GamePanel.height);
 		world.render(g);
 		player.render(g);
-		for(Bullet blt: player.getBlts()){
+		for (Bullet blt : player.getBlts()) {
 			blt.render(g);
 		}
 	}

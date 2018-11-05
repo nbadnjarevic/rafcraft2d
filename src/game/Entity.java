@@ -93,7 +93,7 @@ public class Entity extends GameObject {
 			falling = false;
 			dy = 0;
 			int playerRow = Playstate.world.getRowTile((int) toy + height);
-			y = (playerRow * Game.BLOCKSIZE - height);
+			y = (playerRow * Game.BLOCKSIZE - height + 5);
 		}
 
 		if (!botLeft && !botRight) {
@@ -114,7 +114,7 @@ public class Entity extends GameObject {
 		int rightTile = world.getColTile((int) x + width - 8);
 		int topTile = world.getRowTile((int) y);
 		int midTile = world.getRowTile((int) y + height / 2);
-		int botTile = world.getRowTile((int) y + height);
+		int botTile = world.getRowTile((int) y + height - 5);
 		try {
 			topLeft = !world.getBlocks()[topTile][leftTile].getMaterial().isWalkable();
 			topRight = !world.getBlocks()[topTile][rightTile].getMaterial().isWalkable();

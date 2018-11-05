@@ -1,6 +1,9 @@
 package game;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -15,6 +18,10 @@ public class World {
 
 	public World(String filepath, int chunksize) {
 		loadWorld(filepath);
+	}
+
+	public World(BufferedImage map, int chunksize) {
+		loadWorld2(map);
 	}
 
 	public void render(Graphics2D g) {
@@ -35,8 +42,36 @@ public class World {
 				}
 			}
 		}
-		//g.setColor(Color.white);
-		//g.drawString("Blocks rendered: " + blocksRendered, 5, 20);
+		// g.setColor(Color.white);
+		// g.drawString("Blocks rendered: " + blocksRendered, 5, 20);
+	}
+
+	public void loadWorld2(BufferedImage img) {
+		blocksX = img.getWidth();
+		blocksY = img.getHeight();
+		blocks = new Block[blocksY][blocksX];
+		int id = 0;
+		int pxcolor = 0;
+		for (int y = 0; y < blocksY; y++) {
+			for (int x = 0; x < blocksX; x++) {
+				pxcolor = img.getRGB(x, y);
+				if (pxcolor == Color.RED.getRGB()) {
+					id = 6;
+				} else if (pxcolor == Color.GREEN.getRGB()) {
+					id = 2;
+				} else if (pxcolor == Color.BLUE.getRGB()) {
+					id = 4;
+				} else if (pxcolor == Color.BLACK.getRGB()) {
+					id = 0;
+				} else if (pxcolor == Color.MAGENTA.getRGB()) {
+					id = 5;
+				} else if (pxcolor == Color.YELLOW.getRGB()) {
+					id = 1;
+				}
+				blocks[y][x] = new Block(Material.values()[id], x * Game.BLOCKSIZE, y * Game.BLOCKSIZE, Game.BLOCKSIZE,
+						Game.BLOCKSIZE);
+			}
+		}
 	}
 
 	public void loadWorld(String filepath) {
