@@ -1,5 +1,6 @@
 package game;
 
+import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -11,10 +12,10 @@ public class Sprite {
 	BufferedImage raster;
 
 	public Sprite() {
-		this.raster = new BufferedImage(240, 160, BufferedImage.TYPE_INT_RGB);
+		this.raster = new BufferedImage(240, 160, BufferedImage.TYPE_INT_ARGB);
 		File outputfile = new File("img/spritesheet.png");
 		int rgb[] = { 100, 100, 255 };
-		int col = (rgb[0] << 16) | (rgb[1] << 8) | rgb[2];
+		int col = new Color(rgb[0], rgb[1], rgb[2], 0).getRGB();
 		for (int y = 0; y < this.raster.getHeight(); y++) {
 			for (int x = 0; x < this.raster.getWidth(); x++) {
 				this.raster.setRGB(x, y, col);
@@ -44,14 +45,18 @@ public class Sprite {
 				int r = (int) (Math.random() * ((3) + 1));
 				switch (r) {
 				case 1: {
-					col = (rgb1[0] << 16) | (rgb1[1] << 8) | rgb1[2];
+					col = new Color(rgb1[0], rgb1[1], rgb1[2], 255).getRGB();
 					raster.setRGB(i, j, col);
 					break;
 				}
 				case 2: {
-					col = (rgb2[0] << 16) | (rgb2[1] << 8) | rgb2[2];
+					col = new Color(rgb2[0], rgb2[1], rgb2[2], 255).getRGB();
 					raster.setRGB(i, j, col);
 					break;
+				}
+				case 3: {
+					col = new Color(rgb1[0], rgb1[1], rgb1[2], 0).getRGB();
+					raster.setRGB(i, j, col);
 				}
 				}
 
@@ -67,26 +72,21 @@ public class Sprite {
 		int col = (rgb[0] << 16) | (rgb[1] << 8) | rgb[2];
 		for (int i = startY; i < startY + blocksize; i++) {
 			for (int j = startX + 16; j < startX + blocksize - 16; j++) {
-				col = (rgb[0] << 16) | (rgb[1] << 8) | rgb[2];
+				col = new Color(rgb[0], rgb[1], rgb[2], 255).getRGB();
 				raster.setRGB(j, i, col);
 			}
 		}
 		for (int i = startY; i < startY + blocksize; i++) {
 			for (int j = startX + 10; j < startX + 15; j++) {
-				col = (rgb1[0] << 16) | (rgb1[1] << 8) | rgb1[2];
+				col = new Color(rgb1[0], rgb1[1], rgb1[2], 255).getRGB();
 				raster.setRGB(j, i, col);
 			}
 		}
 		for (int i = startY; i < startY + blocksize; i++) {
 			for (int j = startX + blocksize - 16; j < startX + blocksize - 10; j++) {
-				col = (rgb1[0] << 16) | (rgb1[1] << 8) | rgb1[2];
+				col = new Color(rgb1[0], rgb1[1], rgb1[2], 255).getRGB();
 				raster.setRGB(j, i, col);
 			}
-		}
-		for (int i = startY + 15; i < startY + blocksize - 15; i++) {
-			col = (rgb1[0] << 16) | (rgb1[1] << 8) | rgb1[2];
-			raster.setRGB(startX + 25, i, col);
-			raster.setRGB(startX + blocksize - 25, i, col);
 		}
 	}
 
@@ -96,21 +96,21 @@ public class Sprite {
 		int[] rgb1 = { 112, 128, 144 };
 		int[] rgb2 = { 119, 136, 153 };
 		int[] rgb3 = { 105, 105, 105 };
-		int col = (rgb1[0] << 16) | (rgb1[1] << 8) | rgb1[2];
+		int col = new Color(rgb1[0], rgb1[1], rgb1[2], 255).getRGB();
 		for (int i = startY; i < startY + blocksize; i++) {
 			for (int j = startX; j < startX + blocksize; j++) {
 				int r = (int) (Math.random() * ((3) + 1));
 				switch (r) {
 				case 1: {
-					col = (rgb1[0] << 16) | (rgb1[1] << 8) | rgb1[2];
+					col = new Color(rgb1[0], rgb1[1], rgb1[2], 255).getRGB();
 					break;
 				}
 				case 2: {
-					col = (rgb2[0] << 16) | (rgb2[1] << 8) | rgb2[2];
+					col = new Color(rgb2[0], rgb2[1], rgb2[2], 255).getRGB();
 					break;
 				}
 				case 3: {
-					col = (rgb3[0] << 16) | (rgb3[1] << 8) | rgb3[2];
+					col = new Color(rgb3[0], rgb3[1], rgb3[2], 255).getRGB();
 					break;
 				}
 				}
@@ -137,15 +137,15 @@ public class Sprite {
 				int r = (int) (Math.random() * ((3) + 1));
 				switch (r) {
 				case 1: {
-					col = (rgb1[0] << 16) | (rgb1[1] << 8) | rgb1[2];
+					col = new Color(rgb1[0], rgb1[1], rgb1[2], 255).getRGB();
 					break;
 				}
 				case 2: {
-					col = (rgb2[0] << 16) | (rgb2[1] << 8) | rgb2[2];
+					col = new Color(rgb2[0], rgb2[1], rgb2[2], 255).getRGB();
 					break;
 				}
 				case 3: {
-					col = (rgb3[0] << 16) | (rgb3[1] << 8) | rgb3[2];
+					col = new Color(rgb3[0], rgb3[1], rgb3[2], 255).getRGB();
 					break;
 				}
 				}
@@ -157,15 +157,15 @@ public class Sprite {
 				int r = (int) (Math.random() * ((3) + 1));
 				switch (r) {
 				case 1: {
-					col = (rgb4[0] << 16) | (rgb4[1] << 8) | rgb4[2];
+					col = new Color(rgb4[0], rgb4[1], rgb4[2], 255).getRGB();
 					break;
 				}
 				case 2: {
-					col = (rgb5[0] << 16) | (rgb5[1] << 8) | rgb5[2];
+					col = new Color(rgb5[0], rgb5[1], rgb5[2], 255).getRGB();
 					break;
 				}
 				case 3: {
-					col = (rgb6[0] << 16) | (rgb6[1] << 8) | rgb6[2];
+					col = new Color(rgb6[0], rgb6[1], rgb6[2], 255).getRGB();
 					break;
 				}
 				}
@@ -186,15 +186,15 @@ public class Sprite {
 				int r = (int) (Math.random() * ((3) + 1));
 				switch (r) {
 				case 1: {
-					col = (rgb1[0] << 16) | (rgb1[1] << 8) | rgb1[2];
+					col = new Color(rgb1[0], rgb1[1], rgb1[2], 255).getRGB();
 					break;
 				}
 				case 2: {
-					col = (rgb2[0] << 16) | (rgb2[1] << 8) | rgb2[2];
+					col = new Color(rgb2[0], rgb2[1], rgb2[2], 255).getRGB();
 					break;
 				}
 				case 3: {
-					col = (rgb3[0] << 16) | (rgb3[1] << 8) | rgb3[2];
+					col = new Color(rgb3[0], rgb3[1], rgb3[2], 255).getRGB();
 					break;
 				}
 				}

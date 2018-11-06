@@ -10,11 +10,12 @@ public class Playstate extends State {
 	public static World world;
 	public static Player player;
 	public static Camera camera;
+	public static BufferedImage background = ImageLoader.load("img/backdrop.png");;
 
 	public Playstate(GameStateManager gsm) {
 		super(gsm);
 		BufferedImage map = ImageLoader.load("worlds/map.png");
-		world = new World(map , 10);
+		world = new World(map, 10);
 		player = new Player(100, 700, 32, 48, 3F);
 		camera = new Camera(player);
 	}
@@ -23,13 +24,19 @@ public class Playstate extends State {
 	public void update() {
 		player.update();
 		for (Bullet blt : player.getBlts()) {
+			if (blt.x == GamePanel.width / GamePanel.SCALE || blt.x == -blt.width) {
+				player.getBlts().remove(blt);
+				blt = null;
+				break;
+			}
 			blt.update();
 		}
 	}
 
 	@Override
 	public void render(Graphics2D g) {
-		g.clearRect(0, 0, GamePanel.width, GamePanel.height);
+		g.drawImage(background, 0, 0, GamePanel.width/GamePanel.SCALE, GamePanel.height/GamePanel.SCALE, null);
+		//g.clearRect(0, 0, GamePanel.width, GamePanel.height);
 		world.render(g);
 		player.render(g);
 		for (Bullet blt : player.getBlts()) {
@@ -55,6 +62,12 @@ public class Playstate extends State {
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e, int k) {
 		// TODO Auto-generated method stub
 
 	}

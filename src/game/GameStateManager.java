@@ -35,4 +35,8 @@ public class GameStateManager {
 		states[state].mouseReleased(e);
 	}
 
+	public void keyTyped(KeyEvent e, int k) {
+		states[state].keyTyped(e, k);
+	}
+
 }

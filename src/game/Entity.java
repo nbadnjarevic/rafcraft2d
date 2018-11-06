@@ -6,7 +6,7 @@ public class Entity extends GameObject {
 
 	// Constants
 	private final float GRAVITY = 0.2F;
-	private final float MAX_FALLING_SPEED = 2.5F;
+	private final float MAX_FALLING_SPEED = 5F;
 	private final float JUMP_START = -3.5F;
 
 	// Movement
@@ -148,6 +148,14 @@ public class Entity extends GameObject {
 		x += dx;
 		y += dy;
 		dx = 0;
+	}
+	
+	protected float getDy() {
+		return dy;
+	}
+	
+	protected float getDx() {
+		return dx;
 	}
 
 }

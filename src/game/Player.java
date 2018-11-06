@@ -2,7 +2,6 @@ package game;
 
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public class Player extends Entity {
@@ -36,7 +35,7 @@ public class Player extends Entity {
 			}
 		}
 		if(k == KeyEvent.VK_K){
-			Bullet blt = new Bullet(x, y + height/2, 16, 16, strana);
+			Bullet blt = new Bullet(x, y + height/2, 16, 16, strana, this);
 			blts.add(blt);
 		}
 

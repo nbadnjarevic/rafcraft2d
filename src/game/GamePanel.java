@@ -39,7 +39,6 @@ public class GamePanel extends JPanel implements ComponentListener, ActionListen
 		gsm = new GameStateManager(GameStateManager.PLAYSTATE);
 	}
 
-	
 	public void update() {
 		gsm.update();
 	}
@@ -48,10 +47,10 @@ public class GamePanel extends JPanel implements ComponentListener, ActionListen
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2d = image.createGraphics();
-		g2d.setBackground(new Color(100,100,255));
+		g2d.setBackground(new Color(25,25,112));
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-		gsm.render(g2d);
+		gsm.render(g2d); 
 		g.drawImage(image, 0, 0, width, height, null);
 	}
 	
@@ -109,8 +108,7 @@ public class GamePanel extends JPanel implements ComponentListener, ActionListen
 
 	@Override
 	public void keyTyped(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
+		gsm.keyTyped(arg0, arg0.getKeyCode());
 	}
 
 
