@@ -1,6 +1,7 @@
 package game;
 
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
@@ -41,8 +42,10 @@ public class World {
 				}
 			}
 		}
+		g.setColor(Color.red);
+		g.fillRect(5, 5, player.getHealth(), 15);
 		g.setColor(Color.white);
-		g.drawString("Blocks rendered: " + blocksRendered, 5, 20);
+		g.drawString("" + player.getHealth(), 5, 16);
 	}
 
 	public void loadWorld2(BufferedImage img) {

@@ -9,10 +9,13 @@ public class Entity extends GameObject {
 	private final float MAX_FALLING_SPEED = 5F;
 	private final float JUMP_START = -3.5F;
 
+	protected int health = 100;;
+
 	// Movement
 	protected float speed;
 	protected float dx;
 	protected float dy;
+	protected float dyDif = 0;;
 	protected boolean left;
 	protected boolean right;
 	protected boolean falling;
@@ -56,17 +59,17 @@ public class Entity extends GameObject {
 
 	private void calculateAnimations() {
 		animation.update();
-		if(left && animation.getState() != LEFT) {
-			animation.setImages(LEFT, frames[LEFT+2]);
+		if (left && animation.getState() != LEFT) {
+			animation.setImages(LEFT, frames[LEFT + 2]);
 			idle = IDLE_LEFT;
-		} else if(right && animation.getState() != RIGHT) {
+		} else if (right && animation.getState() != RIGHT) {
 			animation.setImages(RIGHT, frames[RIGHT]);
 			idle = IDLE_RIGHT;
 		}
-		if(!left && !right) {
+		if (!left && !right) {
 			animation.setImages(idle, frames[idle]);
 		}
-		if(jumping || falling) {
+		if (jumping || falling) {
 			animation.setImages(idle, frames[idle]);
 		}
 	}
@@ -91,6 +94,10 @@ public class Entity extends GameObject {
 		calculateCorners(x, toy);
 		if (botLeft || botRight && falling) {
 			falling = false;
+			if (dyDif > MAX_FALLING_SPEED * 2) {
+				health -= 10;
+			}
+			dyDif = 0;
 			dy = 0;
 			int playerRow = Playstate.world.getRowTile((int) toy + height);
 			y = (playerRow * Game.BLOCKSIZE - height + 5);
@@ -134,11 +141,13 @@ public class Entity extends GameObject {
 			dx = speed;
 		if (falling && !jumping) {
 			dy += GRAVITY;
+			dyDif += GRAVITY;
 			if (dy > MAX_FALLING_SPEED)
 				dy = MAX_FALLING_SPEED;
 		}
 		if (jumping && !falling) {
 			dy = JUMP_START;
+			dyDif = 0;
 			jumping = false;
 			falling = true;
 		}
@@ -149,13 +158,21 @@ public class Entity extends GameObject {
 		y += dy;
 		dx = 0;
 	}
-	
+
 	protected float getDy() {
 		return dy;
 	}
-	
+
 	protected float getDx() {
 		return dx;
+	}
+
+	protected float getDyDif() {
+		return dyDif;
+	}
+
+	protected int getHealth() {
+		return health;
 	}
 
 }

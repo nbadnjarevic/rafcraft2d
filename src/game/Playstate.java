@@ -1,5 +1,6 @@
 package game;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -24,7 +25,7 @@ public class Playstate extends State {
 	public void update() {
 		player.update();
 		for (Bullet blt : player.getBlts()) {
-			if (blt.x == GamePanel.width / GamePanel.SCALE || blt.x == -blt.width) {
+			if (blt.x > GamePanel.width / GamePanel.SCALE || blt.x < -blt.width) {
 				player.getBlts().remove(blt);
 				blt = null;
 				break;
@@ -35,13 +36,14 @@ public class Playstate extends State {
 
 	@Override
 	public void render(Graphics2D g) {
-		g.drawImage(background, 0, 0, GamePanel.width/GamePanel.SCALE, GamePanel.height/GamePanel.SCALE, null);
-		//g.clearRect(0, 0, GamePanel.width, GamePanel.height);
+		g.drawImage(background, 0, 0, GamePanel.width / GamePanel.SCALE, GamePanel.height / GamePanel.SCALE, null);
+		// g.clearRect(0, 0, GamePanel.width, GamePanel.height);
 		world.render(g);
 		player.render(g);
 		for (Bullet blt : player.getBlts()) {
 			blt.render(g);
 		}
+
 	}
 
 	@Override
