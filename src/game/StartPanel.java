@@ -1,13 +1,11 @@
 package game;
 
-import java.awt.CardLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Insets;
-import java.awt.Toolkit;
+import model.GamePanel;
+
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -60,13 +58,40 @@ public class StartPanel extends JPanel {
 			JPanel cards = Game.getCards();
 			CardLayout cl = (CardLayout) cards.getLayout();
 			drawTransition();
+			//testTransition();
 			cl.next(cards);
 		});
 		btnQuit.addActionListener(e -> {
 			System.exit(0);
-			;
 		});
 	}
+
+	@SuppressWarnings("unused")
+	private void testTransition(){
+		Graphics g = this.getGraphics();
+		int n = GamePanel.height;
+		int m = GamePanel.width;
+		Random r = new Random();
+		int blocksize = Game.BLOCKSIZE;
+		ArrayList<Color> clrs = new ArrayList<>(
+				Arrays.asList(Color.RED, Color.BLACK, Color.BLUE, Color.GREEN, Color.YELLOW, Color.CYAN, Color.ORANGE, Color.PINK));
+
+		for (int i = 0; i < this.getHeight(); i += blocksize) {
+			for (int j = 0; j < this.getWidth(); j+= blocksize) {
+				int index = r.nextInt(clrs.size());
+				g.setColor(clrs.get(index));
+				g.fillRect(j, i, blocksize, blocksize);
+				try {
+					Thread.sleep(2);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+
+	}
+
 
 	private void drawTransition() {
 		Graphics g = this.getGraphics();
@@ -149,6 +174,7 @@ public class StartPanel extends JPanel {
         }
 	}
 
+	@SuppressWarnings("unused")
 	private void drawTransition2() {
 		Graphics g = this.getGraphics();
 		Color color = Color.BLACK;

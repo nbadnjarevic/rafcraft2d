@@ -1,5 +1,7 @@
 package game;
 
+import rend.Spritesheet;
+
 import java.awt.image.BufferedImage;
 
 public class Animation {

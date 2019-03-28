@@ -1,5 +1,10 @@
 package game;
 
+import model.GamePanel;
+import rend.ImageLoader;
+import rend.Sprite;
+import rend.Spritesheet;
+
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 
